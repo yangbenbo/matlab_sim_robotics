@@ -1,9 +1,9 @@
 % compute forward kinematics from twist
 
-function baseToFlange = forwardKinematics(kesi, theta, tool0)
+function baseToFlange = forwardKinematics(tool0, kesi, theta)
 
 baseToFlange = tool0;
 for i = length(theta) : -1 : 1
-    baseToFlange = exp_se3_r(kesi(1 : 3, i), kesi(4 : 6, i), theta(i)) * baseToFlange;
+    baseToFlange = MatrixExp6(VecTose3(kesi(:, i) * theta(i))) * baseToFlange;
 end
 end

@@ -44,7 +44,7 @@ end
 function Range = getJointLimits
     
     % range of joint angle
-    JntUp = deg2rad([170 120 170 120 170 120 175]);
+    JntUp = deg2rad([170 120 170 120 170 120 175])';
     JntLow = -JntUp;
     Range.JntUp = JntUp;
     Range.JntLow = JntLow;    
@@ -74,5 +74,5 @@ function Kesi = getKesi
                 0 0 0 0 0 0 0
         ];
 
-    Kesi.Body = ad_g(inv(getTool)) * Kesi.Space;
+    Kesi.Body = Adjoint(inv(getTool)) * Kesi.Space;
 end

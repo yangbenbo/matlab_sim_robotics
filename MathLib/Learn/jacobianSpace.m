@@ -27,9 +27,9 @@ function jacobian = jacobianSpace(kesi, theta)
 
 num = length(theta);
 T = eye(4, 4);
-ad_g(T);
 for i = 1 : num
-    jacobian(:, i) = ad_g(T) * kesi(:, i);
-    T = T * exp_se3_r(kesi(1 : 3, i), kesi(4 : 6, i), theta(i));
+    jacobian(:, i) = Adjoint(T) * kesi(:, i);
+%     T = T * exp_se3_r(kesi(1 : 3, i), kesi(4 : 6, i), theta(i));
+    T = T * MatrixExp6(VecTose3(kesi(:, i) * theta(i)));
 end
 end
